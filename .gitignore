@@ -1,0 +1,14 @@
+# Node / build tools
+node_modules/
+dist/
+build/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Sensitive configs
+.env
+config.js
