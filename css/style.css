@@ -1,3 +1,44 @@
+/* Space between letters for heading animation */
+.slide-in-letter.space {
+  display: inline-block;
+  width: 0.4em;
+}
+/* Active layout button style */
+.layout-btn.active {
+  background-color: var(--blue);
+  color: #fff;
+  box-shadow: 0 0 6px rgba(63,169,245,0.4);
+}
+/* Base grid */
+.products {
+  display: grid;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+/* One column */
+.products.one-column {
+  grid-template-columns: 1fr;
+}
+
+/* Two columns */
+.products.two-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Use auto-fit on large screens */
+@media (min-width: 768px) {
+  .products {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .btn-filter {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    min-width: 80px;
+  }
+}
 /* Hide button text when added animation is active */
 .btn-cart.added span { opacity: 0; }
 /* Cart button styles and added state animation */
@@ -31,25 +72,39 @@
   80% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+/* Filter buttons layout */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 /* Filter button styles */
 .btn-filter {
   background-color: var(--gray-light);
   color: var(--blue-dark);
   border: none;
-  margin: 0 6px;
-  display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 18px;
   border-radius: 6px;
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1 1 auto;
+  min-width: 100px;
+  max-width: 200px;
+  white-space: nowrap;
 }
+
 .btn-filter.active {
   background-color: var(--blue);
   color: #fff;
 }
+
 .btn-filter:hover {
   background-color: var(--gray);
   transform: scale(1.03);
@@ -79,7 +134,7 @@
   transform: scale(1.05);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-/* Paleta (logo-based) */
+/* Palette (logo-based) */
 :root {
   --blue-dark: #0D3B66;
   --blue: #3FA9F5;
@@ -129,13 +184,13 @@ img { max-width: 100%; display: block; }
   color: var(--blue-dark);
   font-weight: 700;
   font-size: 1.5rem;
-  /* Анимация появления логотипа */
+  /* Logo appearance animation */
   opacity: 0;
 }
 
 .tracking-in-expand {
-  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-          animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  -webkit-animation: tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+          animation: tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 @-webkit-keyframes tracking-in-expand {
@@ -335,12 +390,24 @@ img { max-width: 100%; display: block; }
 .category-card p { color: var(--gray); margin: 0; }
 .category-icon { width: 56px; height: 56px; }
 
-/* Products grid */
+
+/* Products grid (refactored) */
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
   margin-top: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* default for large screens */
+}
+.products.one-column {
+  grid-template-columns: 1fr;
+}
+.products.two-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 768px) {
+  .products {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
 }
 .product {
   background: #fff;

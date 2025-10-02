@@ -1,3 +1,51 @@
+// Smooth scroll for anchor links
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href').slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+});
+
+// Product grid layout switcher
+const productsGrid = document.querySelector('.products');
+const layoutBtns = document.querySelectorAll('.layout-btn');
+
+layoutBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Remove active from all
+    layoutBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const layout = btn.getAttribute('data-layout');
+    productsGrid.classList.remove('one-column', 'two-columns');
+    if (layout === 'one') {
+      productsGrid.classList.add('one-column');
+    } else {
+      productsGrid.classList.add('two-columns');
+    }
+
+    // Save choice in localStorage
+    localStorage.setItem('productLayout', layout);
+  });
+});
+
+// Restore layout choice on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('productLayout');
+  // Remove active from all layout buttons first
+  layoutBtns.forEach(b => b.classList.remove('active'));
+  if (saved) {
+    productsGrid.classList.add(saved === 'one' ? 'one-column' : 'two-columns');
+    document.querySelector(`.layout-btn[data-layout="${saved}"]`)?.classList.add('active');
+  }
+});
+
 // Animate logo and headings on page load
 window.addEventListener('DOMContentLoaded', () => {
   const brandName = document.querySelector('.brand-name');
@@ -13,6 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const span = document.createElement('span');
       span.textContent = char;
       span.classList.add('slide-in-letter');
+      if (char === ' ') span.classList.add('space');
       span.style.animationDelay = (i * 0.06) + 's';
       span.style.animationPlayState = 'paused';
       h2.appendChild(span);
