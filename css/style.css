@@ -1,3 +1,84 @@
+/* Hide button text when added animation is active */
+.btn-cart.added span { opacity: 0; }
+/* Cart button styles and added state animation */
+.btn-cart {
+  transition: all 0.4s ease;
+}
+
+.btn-cart.added {
+  background-color: #2ecc71 !important;
+  color: #fff !important;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+  position: relative;
+}
+
+.btn-cart.added::after {
+  content: 'Pridané';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 0.95rem;
+  opacity: 0;
+  animation: fadeInOut 1.5s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+/* Filter button styles */
+.btn-filter {
+  background-color: var(--gray-light);
+  color: var(--blue-dark);
+  border: none;
+  margin: 0 6px;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn-filter.active {
+  background-color: var(--blue);
+  color: #fff;
+}
+.btn-filter:hover {
+  background-color: var(--gray);
+  transform: scale(1.03);
+}
+/* Fade-out all animation */
+.fade-out-all {
+  animation: fadeOutAll 0.5s forwards;
+}
+
+@keyframes fadeOutAll {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+/* Fade-out animation */
+.fade-out {
+  animation: fadeOut 0.4s forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+/* Cart button added state */
+.btn-cart.added {
+  background-color: #2ecc71 !important;
+  color: #fff !important;
+  transform: scale(1.05);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 /* Paleta (logo-based) */
 :root {
   --blue-dark: #0D3B66;
@@ -8,7 +89,7 @@
   --bg-soft: #F7FBFF;
 }
 
-/* Base */
+/* Palette (logo-based) */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
@@ -59,7 +140,7 @@ img { max-width: 100%; display: block; }
 
 @-webkit-keyframes tracking-in-expand {
   0% {
-    letter-spacing: -0.5em;
+  /* Logo appearance animation */
     opacity: 0;
   }
   40% {
@@ -123,27 +204,75 @@ img { max-width: 100%; display: block; }
   margin: 0 0 24px;
 }
 
-/* Buttons */
+
+/* Base button style */
 .btn {
   display: inline-block;
-  border: none;
-  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-weight: 600;
-  transition: all 0.25s ease;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+/* Primary button (blue) */
 .btn-primary {
-  background: var(--blue);
+  background-color: var(--blue);
   color: #fff;
+  border: none;
 }
-.btn-primary:hover { background: var(--blue-dark); }
-.btn-cart {
-  background: var(--blue-dark);
+.btn-primary:hover {
+  background-color: var(--blue-dark);
+  transform: scale(1.03);
+}
+
+/* Secondary button (gray) */
+.btn-secondary {
+  background-color: var(--gray-light);
+  color: var(--blue-dark);
+  border: none;
+}
+.btn-secondary:hover {
+  background-color: var(--gray);
+  transform: scale(1.03);
+}
+
+/* Remove button */
+.btn-remove {
+  background-color: #e74c3c;
   color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-left: 10px;
 }
-.btn-cart:hover { background: var(--blue); }
+.btn-remove:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+
+/* Cart */
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+.cart-list li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+.cart-total {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+.cart-button {
+  text-align: center;
+  margin: 30px 0;
+}
 
 /* Sections */
 .section { padding: 60px 0; }

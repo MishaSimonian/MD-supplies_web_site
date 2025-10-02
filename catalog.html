@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Katalóg produktov – MD-supplies</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-name">M<span class="D-letter">D</span>-supplies</span>
+      </a>
+      <nav class="site-nav" aria-label="Hlavná navigácia">
+        <ul class="nav-list" id="main-menu">
+          <li><a href="index.html#about">O nás</a></li>
+          <li><a href="#">Katalóg</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Menu" aria-controls="main-menu" aria-expanded="false">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Product Catalog -->
+  <section id="products" class="section">
+    <div class="container">
+      <h2>Katalóg produktov</h2>
+
+  <!-- Product Filter -->
+      <div class="filter-buttons">
+        <button data-filter="all" class="btn-filter active">Všetko</button>
+        <button data-filter="hygiene" class="btn-filter">Hygiena</button>
+        <button data-filter="aspiracia" class="btn-filter">Aspirácia</button>
+        <button data-filter="gauze" class="btn-filter">Gáza</button>
+      </div>
+
+      <div class="cart-button">
+        <a href="cart.html" class="btn btn-secondary">Zobraziť košík</a>
+      </div>
+
+  <!-- Product List -->
+      <div class="products">
+        <div class="product" data-category="hygiene">
+          <img src="assets/products/gloves.png" alt="Rukavice" />
+          <h3>Jednorazové rukavice</h3>
+          <p class="price">€4.90</p>
+          <button class="btn btn-primary btn-cart" data-product-id="gloves"><span>Do košíka</span></button>
+        </div>
+
+        <div class="product" data-category="aspiracia">
+          <img src="assets/products/suction.png" alt="Slinoodsávač" />
+          <h3>Slinoodsávač</h3>
+          <p class="price">€2.50</p>
+          <button class="btn btn-primary btn-cart" data-product-id="suction"><span>Do košíka</span></button>
+        </div>
+
+        <div class="product" data-category="gauze">
+          <img src="assets/products/gauze.png" alt="Sterilná gáza" />
+          <h3>Sterilná gáza</h3>
+          <p class="price">€3.20</p>
+          <button class="btn btn-primary btn-cart" data-product-id="gauze"><span>Do košíka</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Kontakt</h2>
+      <ul class="contact-list">
+        <li><strong>Tel:</strong> <a href="tel:+421950321947">+421 950 321 947</a></li>
+        <li><strong>Email:</strong> <a href="mailto:info@md-supplies.sk">info@md-supplies.sk</a></li>
+        <li><strong>Adresa:</strong> Banská Bystrica, Slovensko</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 MD-supplies. Všetky práva vyhradené.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

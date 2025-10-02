@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Košík – MD-supplies</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-name">M<span class="D-letter">D</span>-supplies</span>
+      </a>
+      <nav class="site-nav" aria-label="Hlavná navigácia">
+        <ul class="nav-list" id="main-menu">
+          <li><a href="index.html#about">O nás</a></li>
+          <li><a href="catalog.html">Katalóg</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Menu" aria-controls="main-menu" aria-expanded="false">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Cart Section -->
+  <section class="section">
+    <div class="container">
+      <h2>Váš košík</h2>
+      <div id="cart-items"></div>
+      <p id="cart-total" class="cart-total"></p>
+      <button id="checkout-btn" class="btn btn-primary">Objednať</button>
+      <button id="clear-cart-btn" class="btn btn-secondary">Vymazať celý košík</button>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Kontakt</h2>
+      <ul class="contact-list">
+        <li><strong>Tel:</strong> <a href="tel:+421950321947">+421 950 321 947</a></li>
+        <li><strong>Email:</strong> <a href="mailto:info@md-supplies.sk">info@md-supplies.sk</a></li>
+        <li><strong>Adresa:</strong> Banská Bystrica, Slovensko</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 MD-supplies. Všetky práva vyhradené.</p>
+    </div>
+  </footer>
+
+  <script src="js/cart.js"></script>
+</body>
+</html>

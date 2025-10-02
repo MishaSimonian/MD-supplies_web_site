@@ -1,13 +1,10 @@
-// Mobilné menu toggle
-// Анимация логотипа при загрузке
+// Animate logo and headings on page load
 window.addEventListener('DOMContentLoaded', () => {
-  // Старая анимация логотипа (целиком)
   const brandName = document.querySelector('.brand-name');
   if (brandName) {
     brandName.classList.add('tracking-in-expand');
   }
 
-  // По-буквенная анимация заголовков секций при появлении в поле зрения
   const h2s = document.querySelectorAll('.section h2');
   h2s.forEach(h2 => {
     const text = h2.textContent;
@@ -40,6 +37,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }));
   }
 });
+
+// Mobile navigation toggle
 const navToggle = document.querySelector('.nav-toggle');
 const navList = document.querySelector('.nav-list');
 if (navToggle && navList) {
@@ -47,13 +46,9 @@ if (navToggle && navList) {
     const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     navToggle.setAttribute('aria-expanded', String(!expanded));
     navList.classList.toggle('show');
-    if (!expanded) {
-      navList.style.maxHeight = navList.scrollHeight + 'px';
-    } else {
-      navList.style.maxHeight = null;
-    }
+    navList.style.maxHeight = !expanded ? navList.scrollHeight + 'px' : null;
   });
-  // Закрытие меню при клике вне навигации
+
   document.addEventListener('click', (e) => {
     if (
       navList.classList.contains('show') &&
@@ -67,16 +62,40 @@ if (navToggle && navList) {
   });
 }
 
-// Klik na "Do košíka"
+// Product filtering by category
+document.querySelectorAll('.btn-filter').forEach(button => {
+  button.addEventListener('click', () => {
+    const selected = button.getAttribute('data-filter');
+
+    document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    document.querySelectorAll('.product').forEach(card => {
+      const category = card.getAttribute('data-category');
+      card.style.display = (selected === 'all' || category === selected) ? 'block' : 'none';
+    });
+  });
+});
+
+// Add product to cart and animate button
 document.querySelectorAll('.btn-cart').forEach(btn => {
   btn.addEventListener('click', () => {
     const id = btn.getAttribute('data-product-id');
-    // TODO: pridať do košíka (localStorage / backend API)
+    const name = btn.parentElement.querySelector('h3').textContent;
+    const price = parseFloat(btn.parentElement.querySelector('.price').textContent.replace('€', ''));
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existing = cart.find(item => item.id === id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ id, name, price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+
     btn.classList.add('added');
-    btn.textContent = 'Pridané';
     setTimeout(() => {
       btn.classList.remove('added');
-      btn.textContent = 'Do košíka';
-    }, 1500);
+    }, 1600);
   });
 });
