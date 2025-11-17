@@ -78,7 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   // Animate section headings letter by letter when in viewport
-  const h2s = document.querySelectorAll('.section h2');
+  const h2s = document.querySelectorAll('.animate-heading');
   h2s.forEach(h2 => {
     const text = h2.textContent;
     h2.textContent = '';
@@ -86,6 +86,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const span = document.createElement('span');
       span.textContent = char;
       span.classList.add('slide-in-letter');
+      if (char === ' ') span.classList.add('space');
       span.style.animationDelay = (i * 0.06) + 's';
       span.style.animationPlayState = 'paused';
       h2.appendChild(span);
