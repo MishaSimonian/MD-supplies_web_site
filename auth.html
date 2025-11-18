@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prihlásenie – MD-supplies</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-name">M<span class="D-letter">D</span>-supplies</span>
+      </a>
+      <nav class="site-nav" aria-label="Hlavná navigácia">
+        <ul class="nav-list" id="main-menu">
+          <li><a href="#about">O nás</a></li>
+          <li><a href="catalog.html">Katalóg</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+          <li id="auth-links" class="auth-links"><!-- Filled by js/auth.js --></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Menu" aria-controls="main-menu" aria-expanded="false">☰</button>
+      </nav>
+    </div>
+  </header>
+
+
+  <main class="section">
+    <div class="container">
+      <h2>Účet</h2>
+      <div class="auth-tabs" role="tablist">
+        <button id="tab-login" class="tab active">Prihlásiť sa</button>
+        <button id="tab-register" class="tab">Registrovať sa</button>
+      </div>
+
+      <div id="login-panel" class="auth-panel">
+        <form id="login-form" class="auth-form">
+          <label>Email<input type="email" name="email" required></label>
+          <label>Heslo<input type="password" name="password" required minlength="6"></label>
+          <div class="form-row">
+            <button type="submit" class="btn btn-primary">Prihlásiť sa</button>
+          </div>
+          <p class="form-error" id="login-error" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div id="register-panel" class="auth-panel" style="display:none;">
+        <form id="register-form" class="auth-form">
+          <label>Meno<input type="text" name="name" required></label>
+          <label>Email<input type="email" name="email" required></label>
+          <label>Heslo<input type="password" name="password" required minlength="6"></label>
+          <div class="form-row">
+            <button type="submit" class="btn btn-primary">Registrovať sa</button>
+          </div>
+          <p class="form-error" id="register-error" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Kontakt -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Kontakt</h2>
+      <ul class="contact-list">
+        <li><strong>Tel:</strong> <a href="tel:+421950321947">+421 950 321 947</a></li>
+        <li><strong>Email:</strong> <a href="mailto:info@md-supplies.sk">info@md-supplies.sk</a></li>
+        <li><strong>Adresa:</strong> Banská Bystrica, Slovensko</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 MD-supplies. Všetky práva vyhradené.</p>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -126,7 +126,7 @@ document.querySelectorAll('.btn-filter').forEach(button => {
   });
 });
 
-// Add product to cart and animate button
+// Add product to cart and transform Add button into quantity controls
 document.querySelectorAll('.btn-cart').forEach(btn => {
   btn.addEventListener('click', () => {
     const id = btn.getAttribute('data-product-id');
@@ -142,9 +142,88 @@ document.querySelectorAll('.btn-cart').forEach(btn => {
     }
     localStorage.setItem('cart', JSON.stringify(cart));
 
+    // If there's already a qty controls area, update it; otherwise transform the Add button into controls
+    const productCard = btn.closest('.product');
+    const existingControls = productCard.querySelector('.card-qty-controls');
+    if (existingControls) {
+      const span = existingControls.querySelector('.qty-value');
+      span.textContent = String(cart.find(i => i.id === id).quantity);
+    } else {
+      btn.style.display = 'none';
+      const controls = createCardQtyControls(id, productCard);
+      btn.parentElement.appendChild(controls);
+    }
+
+    // small added animation on the original button for visual feedback
     btn.classList.add('added');
     setTimeout(() => {
       btn.classList.remove('added');
-    }, 1600);
+    }, 800);
+  });
+});
+
+// Create quantity controls for product card (catalog)
+function createCardQtyControls(id, productCard){
+  const wrapper = document.createElement('div');
+  wrapper.className = 'card-qty-controls';
+
+  const decrease = document.createElement('button'); decrease.className = 'qty-btn'; decrease.type = 'button'; decrease.textContent = '−';
+  const value = document.createElement('span'); value.className = 'qty-value'; value.textContent = '1';
+  const increase = document.createElement('button'); increase.className = 'qty-btn'; increase.type = 'button'; increase.textContent = '+';
+
+  wrapper.appendChild(decrease);
+  wrapper.appendChild(value);
+  wrapper.appendChild(increase);
+
+  // read current cart value if present
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const item = cart.find(i => i.id === id);
+  if (item) value.textContent = String(item.quantity);
+
+  decrease.addEventListener('click', ()=>{
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const it = cart.find(i => i.id === id);
+    if(!it) return;
+    it.quantity = (it.quantity||0) - 1;
+    if(it.quantity <= 0){
+      // remove and restore Add button
+      const addBtn = productCard.querySelector('.btn-cart');
+      const controls = productCard.querySelector('.card-qty-controls');
+      cart.splice(cart.indexOf(it),1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      if(controls) controls.remove();
+      if(addBtn) addBtn.style.display = '';
+      return;
+    }
+    value.textContent = String(it.quantity);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  });
+
+  increase.addEventListener('click', ()=>{
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const it = cart.find(i => i.id === id);
+    if(!it) return;
+    it.quantity = (it.quantity||0) + 1;
+    value.textContent = String(it.quantity);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  });
+
+  return wrapper;
+}
+
+// Initialize product card controls on load if cart already has items
+window.addEventListener('DOMContentLoaded', ()=>{
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  document.querySelectorAll('.product').forEach(card => {
+    const pid = card.querySelector('.btn-cart')?.getAttribute('data-product-id');
+    if(!pid) return;
+    const item = cart.find(i => i.id === pid);
+    if(item){
+      const btn = card.querySelector('.btn-cart');
+      if(btn) btn.style.display = 'none';
+      const controls = createCardQtyControls(pid, card);
+      controls.querySelector('.qty-value').textContent = String(item.quantity);
+      card.querySelector('.btn-cart')?.parentElement.appendChild(controls);
+    }
   });
 });

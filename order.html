@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Objednávka – MD-supplies</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><span class="brand-name">M<span class="D-letter">D</span>-supplies</span></a>
+      <nav class="site-nav">
+        <ul class="nav-list" id="main-menu">
+          <li><a href="index.html#about">O nás</a></li>
+          <li><a href="catalog.html">Katalóg</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+          <li id="auth-links" class="auth-links"><!-- Filled by js/auth.js --></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Menu">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+    <h2>Detaily objednávky</h2>
+      <div id="order-detail"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 MD-supplies. Všetky práva vyhradené.</p>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/order.js"></script>
+</body>
+</html>
