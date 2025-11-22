@@ -26,28 +26,30 @@
     </div>
   </header>
 
-  <!-- Cart Section -->
-  <section class="section">
-    <div class="container">
-      <h2 class="animate-heading">Váš košík</h2>
-      <div id="cart-items"></div>
-      <p id="cart-total" class="cart-total"></p>
-      <button id="checkout-btn" class="btn btn-primary">Objednať</button>
-      <button id="clear-cart-btn" class="btn btn-secondary">Vymazať celý košík</button>
-    </div>
-  </section>
+  <main>
+    <!-- Cart Section -->
+    <section class="section" aria-labelledby="cart-heading">
+      <div class="container">
+        <h2 id="cart-heading" class="animate-heading">Váš košík</h2>
+        <div id="cart-items"></div>
+        <p id="cart-total" class="cart-total" aria-live="polite"></p>
+        <button id="checkout-btn" type="button" class="btn btn-primary">Objednať</button>
+        <button id="clear-cart-btn" type="button" class="btn btn-secondary">Vymazať celý košík</button>
+      </div>
+    </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="section">
-    <div class="container">
-      <h2>Kontakt</h2>
-      <ul class="contact-list">
-        <li><strong>Tel:</strong> <a href="tel:+421950321947">+421 950 321 947</a></li>
-        <li><strong>Email:</strong> <a href="mailto:info@md-supplies.sk">info@md-supplies.sk</a></li>
-        <li><strong>Adresa:</strong> Banská Bystrica, Slovensko</li>
-      </ul>
-    </div>
-  </section>
+    <!-- Contact Section -->
+    <section id="contact" class="section" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 id="contact-heading">Kontakt</h2>
+        <ul class="contact-list">
+          <li><strong>Tel:</strong> <a href="tel:+421950321947">+421 950 321 947</a></li>
+          <li><strong>Email:</strong> <a href="mailto:info@md-supplies.sk">info@md-supplies.sk</a></li>
+          <li><strong>Adresa:</strong> Banská Bystrica, Slovensko</li>
+        </ul>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="site-footer">
@@ -57,6 +59,7 @@
   </footer>
 
   <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
   <script src="js/cart.js"></script>
 </body>
 </html>
