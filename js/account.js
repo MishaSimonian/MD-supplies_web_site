@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure auth UI is up to date
-  if(window.__auth) window.__auth.updateHeaderAuthUI();
+  if (window.__auth) window.__auth.updateHeaderAuthUI();
 
   const user = window.__auth ? window.__auth.getCurrentUser() : null;
-  if(!user){ window.location.href = 'auth.html'; return; }
+  if (!user) {
+    window.location.href = 'auth.html';
+    return;
+  }
 
   const profileCard = document.getElementById('profile-card');
   const ordersList = document.getElementById('orders-list');
 
-  if(profileCard){
+  if (profileCard) {
     profileCard.innerHTML = `\
       <h3>Profil</h3>\
       <p><strong>Meno:</strong> ${user.name}</p>\
@@ -16,20 +19,53 @@ document.addEventListener('DOMContentLoaded', () => {
       <p><strong>Registrovaný:</strong> ${new Date(user.createdAt).toLocaleString()}</p>`;
   }
 
-  const orders = JSON.parse(localStorage.getItem('orders')||'[]');
+  const orders = JSON.parse(localStorage.getItem('orders') || '[]');
   const myOrders = orders.filter(o => o.userId === user.id);
-  if(ordersList){
-    if(myOrders.length === 0){ ordersList.innerHTML += '<p>Ešte žiadne objednávky.</p>'; }
-    else {
-      const ul = document.createElement('ul'); ul.className='account-orders';
+
+  if (ordersList) {
+    if (myOrders.length === 0) {
+      ordersList.innerHTML += '<p>Ešte žiadne objednávky.</p>';
+    } else {
+      const ul = document.createElement('ul');
+      ul.className = 'account-orders';
+
       myOrders.forEach(o => {
         const li = document.createElement('li');
-        const a = document.createElement('a'); a.href = `order.html?id=${encodeURIComponent(o.id)}`; a.className = 'order-link';
-        const date = document.createElement('span'); date.className = 'order-date'; date.textContent = new Date(o.createdAt).toLocaleString();
-        const total = document.createElement('span'); total.className = 'order-total'; total.textContent = `€${o.total.toFixed(2)}`;
-        const count = document.createElement('span'); count.className = 'order-count'; count.textContent = `${o.items.length} položiek`;
-        a.appendChild(date); a.appendChild(total); a.appendChild(count); li.appendChild(a); ul.appendChild(li);
+        const a = document.createElement('a');
+        a.href = `order.html?id=${encodeURIComponent(o.id)}`;
+        a.className = 'order-link';
+
+        const date = document.createElement('span');
+        date.className = 'order-date';
+        date.textContent = new Date(o.createdAt).toLocaleString();
+
+        const total = document.createElement('span');
+        total.className = 'order-total';
+        total.textContent = `€${o.total.toFixed(2)}`;
+
+        const count = document.createElement('span');
+        count.className = 'order-count';
+        const itemCount = o.items.length;
+
+        // Slovak forms: 1 položka, 2–4 položky, 5+ položiek
+        let label;
+        if (itemCount === 1) {
+          label = 'položka';
+        } else if (itemCount >= 2 && itemCount <= 4) {
+          label = 'položky';
+        } else {
+          label = 'položiek';
+        }
+
+        count.textContent = `${itemCount} ${label}`;
+
+        a.appendChild(date);
+        a.appendChild(total);
+        a.appendChild(count);
+        li.appendChild(a);
+        ul.appendChild(li);
       });
+
       ordersList.appendChild(ul);
     }
   }
